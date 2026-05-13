@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="korseta">
+<meta name="application-name" content="korseta">
+<meta name="theme-color" content="#32D74B">
+<meta name="description" content="منصة التعلم العربي الذكي — دورات تقنية احترافية باللغة العربية">
+<meta name="msapplication-TileColor" content="#000000">
+<meta name="msapplication-TileImage" content="icons/icon-144x144.png">
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="manifest.json">
+
+<!-- Apple Touch Icons — مطلوبة لـ Safari -->
+<link rel="apple-touch-icon" href="icons/icon-180x180.png">
+<link rel="apple-touch-icon" sizes="57x57"   href="icons/icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60"   href="icons/icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72"   href="icons/icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76"   href="icons/icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="icons/icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="icons/icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="icons/icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152x152.png">
+<link rel="apple-touch-icon" sizes="167x167" href="icons/icon-167x167.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180x180.png">
+<link rel="apple-touch-startup-image" href="icons/icon-512x512.png">
+
+<title>korseta | منصة التعلم الذكي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+  --primary: #32D74B;
+  --primary-dim: rgba(50,215,75,0.12);
+  --primary-glow: rgba(50,215,75,0.35);
+  --accent: #0A84FF;
+  --gold: #FFD60A;
+  --red: #FF3B30;
+  --purple: #BF5AF2;
+  --bg: #000000;
+  --bg2: #0d0d0f;
+  --bg3: #161618;
+  --bg4: #1c1c1e;
+  --bg5: #242426;
+  --txt: #ffffff;
+  --txt2: #ebebf5cc;
+  --txt3: #929298;
+  --r: 16px;
+  --r2: 24px;
+  --tr: all .3s cubic-bezier(.4,0,.2,1);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);overflow-x:hidden;min-height:100vh;
+  padding-top:var(--safe-top);
+  padding-bottom:var(--safe-bottom);
+  padding-left:var(--safe-left);
+  padding-right:var(--safe-right);
+}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#111}::-webkit-scrollbar-thumb{background:var(--primary);border-radius:99px}
+.hide{display:none!important}
+.screen{display:none;min-height:100vh;width:100%}
+.screen.show{display:flex;flex-direction:column}
+
+/* ===== SAFARI INSTALL BANNER ===== */
+#installBanner {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(22,22,24,0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(50,215,75,0.3);
+  z-index: 9999;
+  padding: 0;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+  border-radius: 24px 24px 0 0;
+  padding-bottom: var(--safe-bottom);
+}
+#installBanner.visible { transform: translateY(0); }
+.install-inner {
+  padding: 20px 20px 16px;
+}
+.install-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.install-icon-wrap {
+  width: 56px; height: 56px;
+  background: linear-gradient(135deg, #0a2010, #000);
+  border: 1.5px solid rgba(50,215,75,0.4);
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; font-weight: 900;
+  color: var(--primary);
+  flex-shrink: 0;
+  letter-spacing: -1px;
+}
+.install-txt h4 { font-size: 15px; font-weight: 900; margin-bottom: 3px; }
+.install-txt p { font-size: 12px; color: var(--txt3); }
+.install-steps {
+  background: var(--bg4);
+  border-radius: var(--r);
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+.install-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.install-step:last-child { border-bottom: none; }
+.step-num {
+  width: 26px; height: 26px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900;
+  color: #000;
+  flex-shrink: 0;
+}
+.step-icon {
+  width: 32px; height: 32px;
+  background: var(--bg5);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.install-step span { font-size: 13px; font-weight: 600; color: var(--txt2); }
+.install-step .highlight { color: var(--primary); font-weight: 800; }
+.install-close {
+  width: 100%;
+  padding: 13px;
+  background: var(--bg5);
+  border: none;
+  border-radius: var(--r);
+  color: var(--txt3);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Cairo', sans-serif;
+}
+
+/* ===== PWA INSTALL TOAST (Android / Chrome) ===== */
+#pwaInstallToast {
+  position: fixed;
+  bottom: 100px;
+  left: 16px; right: 16px;
+  background: var(--bg3);
+  border: 1.5px solid var(--primary);
+  border-radius: var(--r2);
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 9998;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: var(--tr);
+  pointer-events: none;
+}
+#pwaInstallToast.show { transform: translateY(0); opacity: 1; pointer-events: all; }
+#pwaInstallToast .ico { font-size: 24px; flex-shrink: 0; }
+#pwaInstallToast .txt { flex: 1; }
+#pwaInstallToast .txt p { font-size: 13px; font-weight: 700; }
+#pwaInstallToast .txt small { font-size: 11px; color: var(--txt3); }
+#pwaInstallToast button {
+  background: var(--primary);
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+  font-family: 'Cairo', sans-serif;
+  white-space: nowrap;
+}
+
+/* ===== OFFLINE INDICATOR ===== */
+#offlineBar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: var(--red);
+  color: #fff;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px;
+  z-index: 10000;
+  transform: translateY(-100%);
+  transition: transform 0.3s;
+}
+#offlineBar.show { transform: translateY(0); }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pop{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--primary-glow)}50%{box-shadow:0 0 0 12px transparent}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes glow{0%,100%{text-shadow:0 0 20px var(--primary-glow)}50%{text-shadow:0 0 40px var(--primary-glow),0 0 80px var(--primary-glow)}}
+
+/* ===== AUTH SCREEN ===== */
+#authScreen{background:var(--bg);position:fixed;inset:0;z-index:9000;align-items:center;justify-content:center;overflow-y:auto}
+.auth-bg{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.auth-bg span{position:absolute;border-radius:50%;filter:blur(80px);opacity:.15;animation:float 6s ease-in-out infinite}
+.auth-bg span:nth-child(1){width:400px;height:400px;background:var(--primary);top:-100px;right:-100px;animation-delay:0s}
+.auth-bg span:nth-child(2){width:300px;height:300px;background:var(--accent);bottom:-80px;left:-80px;animation-delay:2s}
+.auth-bg span:nth-child(3){width:200px;height:200px;background:var(--purple);top:50%;left:50%;animation-delay:4s}
+.auth-wrap{position:relative;z-index:1;width:90%;max-width:420px;padding:20px 0;margin:auto}
+.auth-logo{text-align:center;margin-bottom:30px;animation:fadeUp .6s ease}
+.auth-logo h1{font-size:52px;font-weight:900;color:var(--primary);letter-spacing:-3px;animation:glow 3s ease-in-out infinite}
+.auth-logo p{color:var(--txt3);font-size:14px;margin-top:4px}
+.auth-tabs{display:flex;background:var(--bg3);border-radius:var(--r2);padding:5px;margin-bottom:25px;animation:fadeUp .6s .1s both ease}
+.auth-tab{flex:1;padding:13px;border:none;background:none;color:var(--txt3);border-radius:var(--r);font-weight:700;font-size:14px;cursor:pointer;transition:var(--tr);font-family:'Cairo',sans-serif}
+.auth-tab.active{background:var(--primary);color:#000}
+.auth-form{animation:fadeUp .5s .2s both ease}
+.field{margin-bottom:14px;position:relative}
+.field label{display:block;font-size:12px;color:var(--txt3);margin-bottom:6px;font-weight:600}
+.field input,.field select{width:100%;padding:16px 18px;background:var(--bg3);border:1.5px solid transparent;border-radius:var(--r);color:var(--txt);font-size:15px;outline:none;transition:var(--tr);font-family:'Cairo',sans-serif}
+.field input:focus,.field select:focus{border-color:var(--primary);background:var(--bg4)}
+.field select option{background:var(--bg3)}
+.btn-main{width:100%;padding:17px;background:var(--primary);color:#000;border:none;border-radius:var(--r);font-weight:900;font-size:16px;cursor:pointer;transition:var(--tr);margin-top:6px;letter-spacing:.5px;font-family:'Cairo',sans-serif}
+.btn-main:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.btn-main:active{transform:scale(.97)}
+.btn-outline{width:100%;padding:15px;background:transparent;color:var(--primary);border:1.5px solid var(--primary);border-radius:var(--r);font-weight:700;font-size:15px;cursor:pointer;transition:var(--tr);margin-top:8px;font-family:'Cairo',sans-serif}
+.auth-divider{display:flex;align-items:center;gap:12px;margin:18px 0;color:var(--txt3);font-size:13px}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--bg5)}
+.project-credit{text-align:center;margin-top:28px;padding:18px;background:var(--bg3);border-radius:var(--r2);animation:fadeUp .6s .4s both ease;border:1px solid rgba(50,215,75,.15)}
+.project-credit p{color:var(--txt3);font-size:12px;line-height:1.8}
+.project-credit strong{color:var(--primary)}
+
+/* ===== TOAST ===== */
+#toast{position:fixed;top:calc(80px + var(--safe-top));left:50%;transform:translateX(-50%) translateY(-20px);background:var(--bg3);border:1px solid var(--primary);color:var(--txt);padding:12px 22px;border-radius:99px;font-size:14px;font-weight:600;z-index:9999;opacity:0;transition:var(--tr);pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ===== MAIN APP ===== */
+#appScreen{position:relative}
+.top-bar{position:fixed;top:var(--safe-top);left:0;right:0;height:68px;background:rgba(0,0,0,.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;align-items:center;padding:0 18px;z-index:500;border-bottom:1px solid rgba(255,255,255,.05)}
+.top-logo{font-size:24px;font-weight:900;color:var(--primary);letter-spacing:-1px}
+.top-right{margin-right:auto;display:flex;align-items:center;gap:10px}
+.xp-badge{background:var(--bg4);padding:7px 13px;border-radius:12px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px}
+.xp-badge i{color:var(--primary)}
+.notif-btn{width:38px;height:38px;background:var(--bg4);border:none;border-radius:12px;color:var(--txt);cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;transition:var(--tr)}
+.notif-btn .dot{position:absolute;top:7px;right:7px;width:7px;height:7px;background:var(--red);border-radius:50%;border:2px solid var(--bg)}
+.content{padding-top:calc(82px + var(--safe-top));padding-bottom:calc(100px + var(--safe-bottom));padding-left:max(18px, var(--safe-left));padding-right:max(18px, var(--safe-right));max-width:680px;margin:0 auto;width:100%}
+.sec{display:none;animation:fadeUp .4s ease}
+.sec.show{display:block}
+
+/* ===== HOME ===== */
+.hero-card{background:linear-gradient(135deg,#0a1a0e,#000);border:1px solid rgba(50,215,75,.2);border-radius:28px;padding:24px;margin-bottom:22px;position:relative;overflow:hidden}
+.hero-card::before{content:'';position:absolute;top:-60px;left:-60px;width:180px;height:180px;background:var(--primary);border-radius:50%;filter:blur(80px);opacity:.12}
+.hero-card .streak{display:inline-flex;align-items:center;gap:6px;background:rgba(255,214,10,.1);border:1px solid rgba(255,214,10,.3);border-radius:99px;padding:5px 12px;font-size:12px;color:var(--gold);font-weight:700;margin-bottom:12px}
+.hero-card h2{font-size:22px;font-weight:900;margin-bottom:6px}
+.hero-card p{color:var(--txt3);font-size:13px;line-height:1.7}
+.progress-wrap{margin-top:18px}
+.progress-label{display:flex;justify-content:space-between;font-size:12px;color:var(--txt3);margin-bottom:8px}
+.progress-bar{height:8px;background:var(--bg5);border-radius:99px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),#00e676);border-radius:99px;transition:width 1s ease}
+.sec-title{font-size:18px;font-weight:900;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.sec-title span{font-size:13px;color:var(--primary);font-weight:600;margin-right:auto;cursor:pointer}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px}
+.stat-card{background:var(--bg3);border-radius:var(--r2);padding:16px;text-align:center;transition:var(--tr)}
+.stat-card:active{transform:scale(.96)}
+.stat-card .val{font-size:26px;font-weight:900;color:var(--primary)}
+.stat-card .lbl{font-size:11px;color:var(--txt3);margin-top:4px}
+.course-card{background:var(--bg3);border-radius:var(--r2);padding:18px;margin-bottom:12px;display:flex;align-items:center;gap:15px;cursor:pointer;transition:var(--tr);border:1px solid transparent}
+.course-card:hover,.course-card:active{border-color:rgba(50,215,75,.2);background:var(--bg4)}
+.course-thumb{width:60px;height:60px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.course-info{flex:1;min-width:0}
+.course-info h4{font-size:14px;font-weight:800;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.course-info p{font-size:11px;color:var(--txt3)}
+.course-info .mini-bar{height:4px;background:var(--bg5);border-radius:99px;margin-top:8px;overflow:hidden}
+.course-info .mini-fill{height:100%;background:var(--primary);border-radius:99px}
+.course-badge{background:var(--bg5);padding:5px 10px;border-radius:8px;font-size:11px;font-weight:700;color:var(--primary);white-space:nowrap}
+
+/* ===== EXPLORE ===== */
+.search-wrap{position:relative;margin-bottom:20px}
+.search-wrap input{width:100%;padding:16px 18px 16px 50px;background:var(--bg3);border:1.5px solid transparent;border-radius:var(--r2);color:var(--txt);font-size:15px;outline:none;transition:var(--tr);font-family:'Cairo',sans-serif}
+.search-wrap input:focus{border-color:var(--primary)}
+.search-wrap i{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:var(--txt3)}
+.cats{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:20px;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cat-btn{padding:9px 16px;background:var(--bg3);border:1.5px solid transparent;border-radius:99px;color:var(--txt3);font-size:13px;font-weight:700;white-space:nowrap;cursor:pointer;transition:var(--tr);flex-shrink:0;font-family:'Cairo',sans-serif}
+.cat-btn.active{background:var(--primary-dim);border-color:var(--primary);color:var(--primary)}
+
+/* ===== COURSE DETAIL ===== */
+#courseDetail{background:var(--bg);position:fixed;inset:0;z-index:600;overflow-y:auto;display:none;flex-direction:column}
+#courseDetail.show{display:flex}
+.detail-header{padding:calc(60px + var(--safe-top)) 18px 24px;background:linear-gradient(180deg,#0a1a0e,var(--bg))}
+.back-btn{position:fixed;top:calc(18px + var(--safe-top));right:18px;width:40px;height:40px;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border:none;border-radius:12px;color:var(--txt);font-size:18px;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center}
+.detail-icon{width:80px;height:80px;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:16px}
+.detail-header h2{font-size:22px;font-weight:900;margin-bottom:8px}
+.detail-meta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.meta-tag{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--txt3)}
+.meta-tag i{color:var(--primary)}
+.enroll-btn{width:100%;padding:17px;background:var(--primary);color:#000;border:none;border-radius:var(--r2);font-weight:900;font-size:16px;cursor:pointer;transition:var(--tr);margin-bottom:24px;font-family:'Cairo',sans-serif}
+.enroll-btn:active{transform:scale(.97)}
+.enroll-btn.enrolled{background:var(--bg4);color:var(--primary);border:1.5px solid var(--primary)}
+.lessons-list{padding:0 18px calc(80px + var(--safe-bottom))}
+.lesson-item{display:flex;align-items:center;gap:14px;padding:16px;background:var(--bg3);border-radius:var(--r2);margin-bottom:10px;cursor:pointer;transition:var(--tr);border:1px solid transparent}
+.lesson-item:hover{border-color:rgba(50,215,75,.15)}
+.lesson-item.done{border-color:rgba(50,215,75,.3)}
+.lesson-num{width:40px;height:40px;border-radius:12px;background:var(--bg5);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:var(--txt3);flex-shrink:0}
+.lesson-item.done .lesson-num{background:var(--primary-dim);color:var(--primary)}
+.lesson-info{flex:1}
+.lesson-info h5{font-size:13px;font-weight:800;margin-bottom:3px}
+.lesson-info p{font-size:11px;color:var(--txt3)}
+.lesson-check{color:var(--txt3);font-size:14px}
+.lesson-item.done .lesson-check{color:var(--primary)}
+
+/* ===== LESSON PLAYER ===== */
+#lessonPlayer{background:var(--bg);position:fixed;inset:0;z-index:700;overflow-y:auto;display:none;flex-direction:column}
+#lessonPlayer.show{display:flex}
+.player-top{background:var(--bg3);padding:calc(60px + var(--safe-top)) 18px 24px}
+.video-mock{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#0a1a0e,#000014);border-radius:var(--r2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;margin-bottom:16px;position:relative;overflow:hidden;border:1px solid rgba(50,215,75,.15)}
+.video-mock::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(50,215,75,.08),transparent 70%)}
+.play-icon{width:68px;height:68px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--tr);animation:pulse 2s ease-in-out infinite}
+.play-icon:hover{transform:scale(1.1)}
+.play-icon i{font-size:26px;color:#000;margin-right:-3px}
+.player-controls{display:flex;align-items:center;gap:12px;padding:14px;background:var(--bg4);border-radius:var(--r2);margin-bottom:16px}
+.ctrl-btn{width:40px;height:40px;background:var(--bg5);border:none;border-radius:12px;color:var(--txt);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--tr)}
+.ctrl-btn:active{transform:scale(.9)}
+.player-progress{flex:1;height:6px;background:var(--bg5);border-radius:99px;overflow:hidden;cursor:pointer}
+.player-fill{height:100%;background:var(--primary);border-radius:99px;width:0%;transition:width .3s}
+.player-body{padding:18px;flex:1}
+.player-body h3{font-size:18px;font-weight:900;margin-bottom:10px}
+.quiz-card{background:var(--bg3);border-radius:var(--r2);padding:20px;margin-top:20px;border:1px solid rgba(50,215,75,.15)}
+.quiz-card h4{font-size:15px;font-weight:800;margin-bottom:16px;color:var(--primary)}
+.quiz-opt{padding:13px 16px;background:var(--bg4);border-radius:var(--r);margin-bottom:8px;cursor:pointer;font-size:14px;font-weight:600;transition:var(--tr);border:1.5px solid transparent}
+.quiz-opt:hover{border-color:var(--primary)}
+.quiz-opt.correct{background:rgba(50,215,75,.15);border-color:var(--primary);color:var(--primary)}
+.quiz-opt.wrong{background:rgba(255,59,48,.1);border-color:var(--red);color:var(--red)}
+.complete-btn{width:100%;padding:17px;background:var(--primary);color:#000;border:none;border-radius:var(--r2);font-weight:900;font-size:16px;cursor:pointer;margin-top:20px;transition:var(--tr);font-family:'Cairo',sans-serif}
+
+/* ===== LIBRARY ===== */
+.lib-card{background:var(--bg3);border-radius:var(--r2);padding:18px;margin-bottom:12px;cursor:pointer;transition:var(--tr);border:1px solid transparent}
+.lib-card:hover{border-color:rgba(50,215,75,.2)}
+.lib-card-top{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.lib-card h4{font-size:14px;font-weight:800;margin-bottom:4px}
+.lib-card p{font-size:11px;color:var(--txt3)}
+.lib-progress{display:flex;align-items:center;gap:10px}
+.lib-bar{flex:1;height:6px;background:var(--bg5);border-radius:99px;overflow:hidden}
+.lib-fill{height:100%;background:var(--primary);border-radius:99px}
+.lib-pct{font-size:12px;font-weight:800;color:var(--primary)}
+
+/* ===== CERTIFICATES ===== */
+#certView{background:var(--bg);position:fixed;inset:0;z-index:800;overflow-y:auto;display:none;flex-direction:column}
+#certView.show{display:flex}
+.cert-wrap{padding:calc(70px + var(--safe-top)) 18px calc(40px + var(--safe-bottom))}
+.certificate{background:linear-gradient(135deg,#0a0a0a,#111);border:2px solid var(--gold);border-radius:28px;padding:32px 24px;text-align:center;position:relative;overflow:hidden;margin-bottom:20px}
+.certificate::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),#ff9500,var(--gold));background-size:200% 100%;animation:shimmer 2s linear infinite}
+.certificate::after{content:'';position:absolute;inset:8px;border:1px solid rgba(255,214,10,.2);border-radius:22px;pointer-events:none}
+.cert-logo{font-size:32px;font-weight:900;color:var(--primary);letter-spacing:-2px;margin-bottom:6px}
+.cert-subtitle{font-size:12px;color:var(--txt3);margin-bottom:24px}
+.cert-line{width:80px;height:2px;background:var(--gold);margin:0 auto 24px}
+.cert-presents{font-size:12px;color:var(--txt3);margin-bottom:8px}
+.cert-name{font-size:28px;font-weight:900;color:var(--gold);margin-bottom:8px}
+.cert-body{font-size:13px;color:var(--txt2);line-height:1.8;margin-bottom:20px}
+.cert-course{font-size:17px;font-weight:900;color:var(--primary);margin-bottom:24px}
+.cert-footer{display:flex;justify-content:space-between;align-items:flex-end;padding-top:20px;border-top:1px solid rgba(255,214,10,.2)}
+.cert-footer .sig{font-size:11px;color:var(--txt3);text-align:center}
+.cert-footer .sig strong{display:block;font-size:13px;color:var(--txt);margin-bottom:2px}
+.cert-seal{width:56px;height:56px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;color:#000;animation:pulse 2s infinite}
+.cert-share-btns{display:flex;gap:10px}
+.cert-share-btn{flex:1;padding:14px;border:1.5px solid var(--bg5);background:var(--bg3);border-radius:var(--r);color:var(--txt);font-size:13px;font-weight:700;cursor:pointer;transition:var(--tr);display:flex;align-items:center;justify-content:center;gap:7px;font-family:'Cairo',sans-serif}
+.cert-share-btn:active{transform:scale(.96)}
+
+/* ===== PROFILE ===== */
+.profile-hero{text-align:center;padding:24px;background:var(--bg3);border-radius:28px;margin-bottom:16px;position:relative;overflow:hidden}
+.profile-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--primary),transparent)}
+.ava{width:88px;height:88px;background:linear-gradient(135deg,var(--primary),#00c853);border-radius:28px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:30px;color:#000;font-weight:900;transform:rotate(-3deg)}
+.profile-hero h2{font-size:20px;font-weight:900}
+.profile-hero .role{color:var(--primary);font-size:13px;font-weight:700;margin:4px 0 16px}
+.badges-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.badge-item{background:var(--bg4);padding:6px 12px;border-radius:99px;font-size:11px;font-weight:700;display:flex;align-items:center;gap:5px}
+.prof-menu-item{display:flex;align-items:center;gap:14px;padding:16px;background:var(--bg3);border-radius:var(--r2);margin-bottom:10px;cursor:pointer;transition:var(--tr)}
+.prof-menu-item:active{background:var(--bg4)}
+.prof-menu-item .ico{width:40px;height:40px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.prof-menu-item span{flex:1;font-weight:700;font-size:14px}
+.prof-menu-item i.arr{color:var(--txt3);font-size:12px}
+
+/* ===== LEADERBOARD ===== */
+.lb-item{display:flex;align-items:center;gap:14px;padding:14px;background:var(--bg3);border-radius:var(--r2);margin-bottom:10px;transition:var(--tr)}
+.lb-item.me{background:rgba(50,215,75,.08);border:1px solid rgba(50,215,75,.2)}
+.lb-rank{width:36px;text-align:center;font-weight:900;font-size:16px}
+.lb-rank.gold{color:var(--gold)}
+.lb-rank.silver{color:#b0b0b8}
+.lb-rank.bronze{color:#cd7f32}
+.lb-ava{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px}
+.lb-info{flex:1}
+.lb-info h5{font-weight:800;font-size:14px}
+.lb-info p{font-size:11px;color:var(--txt3)}
+.lb-xp{font-weight:900;font-size:15px;color:var(--primary)}
+
+/* ===== ACHIEVEMENTS ===== */
+.ach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.ach-item{background:var(--bg3);border-radius:var(--r2);padding:16px;text-align:center;transition:var(--tr);border:1px solid transparent}
+.ach-item.unlocked{border-color:rgba(50,215,75,.2)}
+.ach-item.locked{opacity:.4}
+.ach-icon{font-size:28px;margin-bottom:8px}
+.ach-name{font-size:11px;font-weight:800;line-height:1.4}
+
+/* ===== SETTINGS ===== */
+.settings-item{display:flex;align-items:center;justify-content:space-between;padding:16px;background:var(--bg3);border-radius:var(--r2);margin-bottom:10px}
+.settings-item .l{display:flex;align-items:center;gap:12px}
+.settings-item .l i{width:36px;height:36px;background:var(--bg5);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--primary)}
+.settings-item .l span{font-weight:700;font-size:14px}
+.toggle{width:48px;height:26px;background:var(--bg5);border-radius:99px;position:relative;cursor:pointer;transition:var(--tr);flex-shrink:0}
+.toggle.on{background:var(--primary)}
+.toggle::after{content:'';position:absolute;width:20px;height:20px;background:#fff;border-radius:50%;top:3px;right:3px;transition:var(--tr)}
+.toggle.on::after{right:calc(100% - 23px)}
+
+/* ===== BOTTOM NAV ===== */
+.nav-bar{position:fixed;bottom:0;left:0;right:0;height:calc(78px + var(--safe-bottom));background:rgba(20,20,22,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;align-items:flex-start;justify-content:space-around;padding-top:8px;padding-bottom:var(--safe-bottom);z-index:500;border-top:1px solid rgba(255,255,255,.05)}
+.nav-btn{background:none;border:none;color:var(--txt3);display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10px;font-weight:700;cursor:pointer;padding:8px 12px;border-radius:14px;transition:var(--tr);position:relative;font-family:'Cairo',sans-serif}
+.nav-btn.active{color:var(--primary)}
+.nav-btn i{font-size:21px}
+.nav-btn .pip{position:absolute;top:5px;left:calc(50% + 6px);width:6px;height:6px;background:var(--red);border-radius:50%;border:2px solid var(--bg)}
+
+/* ===== MODAL ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(10px);z-index:1000;display:none;align-items:flex-end;justify-content:center}
+.modal-overlay.show{display:flex}
+.modal-box{background:var(--bg3);border-radius:28px 28px 0 0;padding:24px;padding-bottom:calc(24px + var(--safe-bottom));width:100%;max-width:500px;animation:pop .3s ease}
+.modal-box h3{font-size:18px;font-weight:900;margin-bottom:16px;text-align:center}
+.empty{text-align:center;padding:50px 20px;color:var(--txt3)}
+.empty i{font-size:50px;opacity:.2;margin-bottom:14px;display:block}
+.skel{background:linear-gradient(90deg,var(--bg3),var(--bg4),var(--bg3));background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:var(--r);height:80px;margin-bottom:12px}
+</style>
+</head>
+<body>
+
+<!-- ===== OFFLINE BAR ===== -->
+<div id="offlineBar">📵 أنت غير متصل بالإنترنت — بعض المحتوى محفوظ محلياً</div>
+
+<!-- ===== AUTH SCREEN ===== -->
+<div id="authScreen" class="screen show">
+  <div class="auth-bg"><span></span><span></span><span></span></div>
+  <div class="auth-wrap">
+    <div class="auth-logo">
+      <h1>korseta</h1>
+      <p>منصة التعلم العربي الذكي</p>
+    </div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchAuth('login')">تسجيل الدخول</button>
+      <button class="auth-tab" onclick="switchAuth('register')">إنشاء حساب</button>
+    </div>
+    <div id="loginForm" class="auth-form">
+      <div class="field"><label>البريد الإلكتروني</label><input type="email" id="loginEmail" placeholder="example@email.com"></div>
+      <div class="field"><label>كلمة المرور</label><input type="password" id="loginPass" placeholder="••••••••"></div>
+      <button class="btn-main" onclick="doLogin()">🚀 تسجيل الدخول</button>
+      <div class="auth-divider">أو جرّب الحساب التجريبي</div>
+      <button class="btn-outline" onclick="demoLogin()">⚡ دخول سريع تجريبي</button>
+    </div>
+    <div id="registerForm" class="auth-form hide">
+      <div class="field"><label>الاسم الكامل</label><input type="text" id="regName" placeholder="أحمد محمد"></div>
+      <div class="field"><label>البريد الإلكتروني</label><input type="email" id="regEmail" placeholder="example@email.com"></div>
+      <div class="field">
+        <label>المجال الدراسي</label>
+        <select id="regField">
+          <option value="">اختر مجالك</option>
+          <option>تقنية المعلومات</option><option>هندسة الحاسوب</option>
+          <option>علم البيانات</option><option>الأمن السيبراني</option>
+          <option>تصميم الجرافيك</option><option>أخرى</option>
+        </select>
+      </div>
+      <div class="field"><label>كلمة المرور</label><input type="password" id="regPass" placeholder="8 أحرف على الأقل"></div>
+      <button class="btn-main" onclick="doRegister()">✨ إنشاء الحساب</button>
+    </div>
+    <div class="project-credit">
+      <p>🎓 هذا المشروع أعده طلاب تقنية المعلومات<br>بإشراف <strong>الأستاذ الدكتور ناصر شبكة</strong><br>
+      <strong>جامعة التقنية — قسم علوم الحاسب</strong><br>
+      <span style="font-size:11px;opacity:.7">© 2025 — كافة الحقوق محفوظة لـ korseta</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN APP ===== -->
+<div id="appScreen" class="screen">
+  <div class="top-bar">
+    <div class="top-logo">korseta</div>
+    <div class="top-right">
+      <div class="xp-badge"><i class="fa-solid fa-bolt"></i><span id="xpCount">0</span> نقطة</div>
+      <button class="notif-btn" onclick="showNotif()"><i class="fa-solid fa-bell"></i><div class="dot"></div></button>
+    </div>
+  </div>
+  <main class="content">
+    <!-- HOME -->
+    <div id="secHome" class="sec show">
+      <div class="hero-card">
+        <div class="streak"><i class="fa-solid fa-fire"></i> <span id="streakNum">7</span> أيام متواصلة!</div>
+        <h2>أهلاً، <span id="heroName">أحمد</span> 👋</h2>
+        <p>لقد أكملت <span id="doneLessons">0</span> درساً. استمر، أنت في الطريق الصحيح!</p>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>التقدم الأسبوعي</span><span id="weekPct">0%</span></div>
+          <div class="progress-bar"><div class="progress-fill" id="weekBar" style="width:0%"></div></div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card"><div class="val" id="s1">0</div><div class="lbl">درس مكتمل</div></div>
+        <div class="stat-card"><div class="val" id="s2">0</div><div class="lbl">دورة مسجّلة</div></div>
+        <div class="stat-card"><div class="val" id="s3">0</div><div class="lbl">شهادة</div></div>
+      </div>
+      <div class="sec-title">🔥 الدورات الرائجة <span onclick="showSec('secExplore');setNav(1)">عرض الكل</span></div>
+      <div id="homeCourseList"></div>
+      <div class="sec-title" style="margin-top:24px">💡 نصيحة اليوم</div>
+      <div style="background:var(--bg3);border-radius:var(--r2);padding:18px;border-right:4px solid var(--primary)">
+        <p id="tipText" style="font-size:14px;line-height:1.8;color:var(--txt2)"></p>
+      </div>
+    </div>
+    <!-- EXPLORE -->
+    <div id="secExplore" class="sec">
+      <div class="search-wrap">
+        <input type="text" placeholder="ابحث عن دورة أو مدرب..." oninput="filterCourses(this.value)">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <div class="cats" id="catsList"></div>
+      <div id="exploreList"></div>
+    </div>
+    <!-- LIBRARY -->
+    <div id="secLibrary" class="sec">
+      <div class="sec-title">📚 دوراتي</div>
+      <div id="libraryList"><div class="empty"><i class="fa-solid fa-book-open"></i><p>لم تسجل في أي دورة بعد</p></div></div>
+    </div>
+    <!-- PROFILE -->
+    <div id="secProfile" class="sec">
+      <div class="profile-hero">
+        <div class="ava" id="profAva">أ</div>
+        <h2 id="profName">أحمد محمد</h2>
+        <div class="role">⭐ عضوية بريميوم</div>
+        <div class="badges-row" id="badgesRow"></div>
+      </div>
+      <div class="sec-title" style="margin-top:16px">🏆 الإنجازات</div>
+      <div class="ach-grid" id="achGrid"></div>
+      <div class="sec-title" style="margin-top:20px">⚙️ القائمة</div>
+      <div class="prof-menu-item" onclick="openCerts()">
+        <div class="ico" style="background:rgba(255,214,10,.1);color:var(--gold)"><i class="fa-solid fa-certificate"></i></div>
+        <span>شهاداتي</span><i class="fa-solid fa-chevron-left arr"></i>
+      </div>
+      <div class="prof-menu-item" onclick="showSec('secLeaderboard');setNav(-1)">
+        <div class="ico" style="background:rgba(10,132,255,.1);color:var(--accent)"><i class="fa-solid fa-ranking-star"></i></div>
+        <span>لوحة المتصدرين</span><i class="fa-solid fa-chevron-left arr"></i>
+      </div>
+      <div class="prof-menu-item" onclick="showSec('secSettings');setNav(-1)">
+        <div class="ico" style="background:rgba(255,255,255,.06)"><i class="fa-solid fa-gear"></i></div>
+        <span>الإعدادات</span><i class="fa-solid fa-chevron-left arr"></i>
+      </div>
+      <div class="prof-menu-item" onclick="showSec('secFeedback');setNav(-1)">
+        <div class="ico" style="background:rgba(191,90,242,.1);color:var(--purple)"><i class="fa-solid fa-comments"></i></div>
+        <span>الاقتراحات والتقييمات</span><i class="fa-solid fa-chevron-left arr"></i>
+      </div>
+      <!-- زر تثبيت التطبيق -->
+      <div class="prof-menu-item" onclick="showInstallGuide()" id="installMenuItem">
+        <div class="ico" style="background:rgba(50,215,75,.1);color:var(--primary)"><i class="fa-solid fa-mobile-screen-button"></i></div>
+        <span>تثبيت التطبيق على الهاتف</span><i class="fa-solid fa-chevron-left arr"></i>
+      </div>
+      <button class="btn-main" onclick="doLogout()" style="background:rgba(255,59,48,.15);color:var(--red);border:1.5px solid var(--red);margin-top:20px">
+        <i class="fa-solid fa-right-from-bracket"></i> تسجيل الخروج
+      </button>
+    </div>
+    <!-- LEADERBOARD -->
+    <div id="secLeaderboard" class="sec">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+        <button onclick="showSec('secProfile');setNav(3)" style="background:var(--bg3);border:none;color:var(--txt);width:40px;height:40px;border-radius:12px;cursor:pointer;font-size:16px"><i class="fa-solid fa-arrow-right"></i></button>
+        <span class="sec-title" style="margin:0">🏆 لوحة المتصدرين</span>
+      </div>
+      <div id="lbList"></div>
+    </div>
+    <!-- SETTINGS -->
+    <div id="secSettings" class="sec">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+        <button onclick="showSec('secProfile');setNav(3)" style="background:var(--bg3);border:none;color:var(--txt);width:40px;height:40px;border-radius:12px;cursor:pointer;font-size:16px"><i class="fa-solid fa-arrow-right"></i></button>
+        <span class="sec-title" style="margin:0">⚙️ الإعدادات</span>
+      </div>
+      <div id="settingsList"></div>
+    </div>
+    <!-- FEEDBACK -->
+    <div id="secFeedback" class="sec">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+        <button onclick="showSec('secProfile');setNav(3)" style="background:var(--bg3);border:none;color:var(--txt);width:40px;height:40px;border-radius:12px;cursor:pointer;font-size:16px"><i class="fa-solid fa-arrow-right"></i></button>
+        <span class="sec-title" style="margin:0">💬 الاقتراحات</span>
+      </div>
+      <div style="background:var(--bg3);border-radius:var(--r2);padding:20px;margin-bottom:14px">
+        <p style="font-size:13px;color:var(--txt3);margin-bottom:14px">قيّم تجربتك معنا وساعدنا على التحسين</p>
+        <div style="display:flex;gap:8px;justify-content:center;margin-bottom:16px" id="starRating"></div>
+        <textarea id="feedbackText" placeholder="أخبرنا رأيك أو اقتراحاتك..." style="width:100%;background:var(--bg4);border:none;border-radius:var(--r);color:var(--txt);padding:14px;font-size:14px;outline:none;resize:none;height:110px;font-family:'Cairo',sans-serif"></textarea>
+        <button class="btn-main" onclick="submitFeedback()" style="margin-top:12px">إرسال الاقتراح</button>
+      </div>
+      <div class="sec-title">اقتراحات المجتمع</div>
+      <div id="feedbackList"></div>
+    </div>
+  </main>
+  <nav class="nav-bar">
+    <button class="nav-btn active" onclick="showSec('secHome');setNav(0)"><i class="fa-solid fa-house"></i>الرئيسية</button>
+    <button class="nav-btn" onclick="showSec('secExplore');setNav(1)"><i class="fa-solid fa-compass"></i>استكشف</button>
+    <button class="nav-btn" onclick="showSec('secLibrary');setNav(2)"><i class="fa-solid fa-layer-group"></i>مكتبتي</button>
+    <button class="nav-btn" onclick="showSec('secProfile');setNav(3)"><i class="fa-solid fa-circle-user"></i>حسابي<div class="pip"></div></button>
+  </nav>
+</div>
+
+<!-- ===== COURSE DETAIL ===== -->
+<div id="courseDetail">
+  <button class="back-btn" onclick="closeCourse()"><i class="fa-solid fa-xmark"></i></button>
+  <div class="detail-header" id="detailHeader"></div>
+  <div style="padding:0 18px"><button class="enroll-btn" id="enrollBtn" onclick="toggleEnroll()">تسجيل في الدورة مجاناً</button></div>
+  <div class="lessons-list" id="lessonsList"></div>
+</div>
+
+<!-- ===== LESSON PLAYER ===== -->
+<div id="lessonPlayer">
+  <button class="back-btn" onclick="closeLesson()"><i class="fa-solid fa-xmark"></i></button>
+  <div class="player-top">
+    <div class="video-mock" id="videoArea">
+      <div class="play-icon" onclick="togglePlay()"><i class="fa-solid fa-play" id="playIcon"></i></div>
+      <p style="font-size:12px;color:var(--txt3)">محاضرة فيديو — <span id="videoTitle"></span></p>
+    </div>
+    <div class="player-controls">
+      <button class="ctrl-btn" onclick="seekBack()"><i class="fa-solid fa-rotate-right fa-flip-horizontal"></i></button>
+      <button class="ctrl-btn" onclick="togglePlay()" id="playBtn"><i class="fa-solid fa-play"></i></button>
+      <button class="ctrl-btn" onclick="seekFwd()"><i class="fa-solid fa-rotate-right"></i></button>
+      <div class="player-progress" onclick="seekClick(event)"><div class="player-fill" id="playerFill"></div></div>
+      <span id="timeLbl" style="font-size:11px;color:var(--txt3);white-space:nowrap">0:00</span>
+    </div>
+  </div>
+  <div class="player-body" id="playerBody"></div>
+</div>
+
+<!-- ===== CERTIFICATE VIEW ===== -->
+<div id="certView">
+  <button class="back-btn" onclick="document.getElementById('certView').classList.remove('show')"><i class="fa-solid fa-xmark"></i></button>
+  <div class="cert-wrap" id="certContent"></div>
+</div>
+
+<!-- ===== NOTIFICATION MODAL ===== -->
+<div class="modal-overlay" id="notifModal" onclick="if(event.target===this)this.classList.remove('show')">
+  <div class="modal-box"><h3>🔔 الإشعارات</h3><div id="notifList"></div></div>
+</div>
+
+<!-- ===== SAFARI INSTALL BANNER ===== -->
+<div id="installBanner">
+  <div class="install-inner">
+    <div class="install-top">
+      <div class="install-icon-wrap">K</div>
+      <div class="install-txt">
+        <h4>ثبّت تطبيق korseta</h4>
+        <p>أضفه للشاشة الرئيسية للوصول السريع</p>
+      </div>
+    </div>
+    <div class="install-steps">
+      <div class="install-step">
+        <div class="step-num">1</div>
+        <div class="step-icon">⬆️</div>
+        <span>اضغط على زر <span class="highlight">المشاركة</span> في أسفل Safari</span>
+      </div>
+      <div class="install-step">
+        <div class="step-num">2</div>
+        <div class="step-icon">➕</div>
+        <span>اختر <span class="highlight">"إضافة إلى الشاشة الرئيسية"</span></span>
+      </div>
+      <div class="install-step">
+        <div class="step-num">3</div>
+        <div class="step-icon">✅</div>
+        <span>اضغط <span class="highlight">"إضافة"</span> وسيظهر التطبيق!</span>
+      </div>
+    </div>
+    <button class="install-close" onclick="dismissInstallBanner()">فهمت، شكراً</button>
+  </div>
+</div>
+
+<!-- ===== PWA INSTALL TOAST (Android) ===== -->
+<div id="pwaInstallToast">
+  <div class="ico">📲</div>
+  <div class="txt">
+    <p>ثبّت تطبيق korseta</p>
+    <small>تجربة أفضل بدون متصفح</small>
+  </div>
+  <button onclick="triggerPWAInstall()">تثبيت</button>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+// =============================================
+//  PWA — SERVICE WORKER & INSTALL
+// =============================================
+let deferredPrompt = null;
+
+// تسجيل Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => console.log('✅ SW registered:', reg.scope))
+      .catch(err => console.log('SW error:', err));
+  });
+}
+
+// حفظ حدث التثبيت (Chrome/Android)
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  // إظهار Toast للتثبيت بعد 3 ثواني
+  setTimeout(() => {
+    const toast = document.getElementById('pwaInstallToast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 6000);
+  }, 3000);
+});
+
+function triggerPWAInstall() {
+  document.getElementById('pwaInstallToast').classList.remove('show');
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(choice => {
+      if (choice.outcome === 'accepted') toast('🎉 تم تثبيت التطبيق بنجاح!');
+      deferredPrompt = null;
+    });
+  }
+}
+
+window.addEventListener('appinstalled', () => {
+  toast('✅ تم تثبيت korseta على جهازك!');
+  deferredPrompt = null;
+});
+
+// كشف Safari على iOS
+function isIOS() {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+}
+function isInStandaloneMode() {
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+function isSafari() {
+  return /Safari/i.test(navigator.userAgent) && !/CriOS|FxiOS|OPiOS|EdgiOS/i.test(navigator.userAgent);
+}
+
+// إظهار بانر Safari بعد 4 ثواني إذا لم يكن في Standalone
+window.addEventListener('load', () => {
+  if (isIOS() && isSafari() && !isInStandaloneMode()) {
+    const dismissed = localStorage.getItem('installDismissed');
+    if (!dismissed) {
+      setTimeout(() => {
+        document.getElementById('installBanner').classList.add('visible');
+      }, 4000);
+    }
+  }
+});
+
+function dismissInstallBanner() {
+  document.getElementById('installBanner').classList.remove('visible');
+  localStorage.setItem('installDismissed', '1');
+}
+
+function showInstallGuide() {
+  if (isInStandaloneMode()) {
+    toast('✅ التطبيق مثبّت بالفعل على جهازك!');
+    return;
+  }
+  if (isIOS() && isSafari()) {
+    document.getElementById('installBanner').classList.add('visible');
+  } else if (deferredPrompt) {
+    triggerPWAInstall();
+  } else {
+    toast('افتح الموقع عبر Safari على iPhone لتثبيته');
+  }
+}
+
+// مراقبة الاتصال
+window.addEventListener('online',  () => document.getElementById('offlineBar').classList.remove('show'));
+window.addEventListener('offline', () => document.getElementById('offlineBar').classList.add('show'));
+
+// =============================================
+//  STATE
+// =============================================
+let state = {
+  user: null, xp: 1200, streak: 7,
+  enrolledCourses: [], completedLessons: [], certificates: [],
+  ratings: {}, settings: { notifications: true, darkMode: true, arabic: true, autoplay: false },
+  selectedCourse: null, selectedLesson: null,
+  playing: false, playProgress: 0, playTimer: null, selectedStars: 0,
+  feedbacks: [
+    { name: 'سارة العلي', stars: 5, text: 'منصة رائعة، المحتوى واضح ومنظم!' },
+    { name: 'محمد الزهراني', stars: 4, text: 'أتمنى إضافة المزيد من الكورسات في الذكاء الاصطناعي' },
+  ]
+};
+
+const tips = [
+  'التعلم المستمر هو أقوى استثمار يمكنك القيام به. خصص 30 دقيقة يومياً للتعلم.',
+  'حل المشكلات بيديك أفضل 10 مرات من مجرد قراءة الحل. طبّق ما تتعلمه فوراً.',
+  'الاتساق أهم من الكمية. درس صغير كل يوم أفضل من 5 ساعات في الأسبوع.',
+  'لا تخف من الأخطاء — كل خطأ هو خطوة نحو الإتقان.',
+  'التدريس هو أفضل طريقة للتعلم. حاول شرح ما تعلمته لشخص آخر.',
+];
+
+const courses = [
+  { id:1, title:'أساسيات لغة Python من الصفر', cat:'برمجة', icon:'🐍', color:'#3776AB', rating:4.9, students:12400, hours:18, instructor:'د. عمر الحارثي', level:'مبتدئ', desc:'تعلّم Python من الصفر حتى الاحتراف. مثالي للمبتدئين في عالم البرمجة.',
+    lessons:[
+      {id:'1-1',title:'مقدمة في Python وتثبيت البيئة',dur:'25 دقيقة',quiz:{q:'ما هو امتداد ملفات Python؟',opts:['.py','.js','.java','.cpp'],ans:0}},
+      {id:'1-2',title:'المتغيرات وأنواع البيانات',dur:'30 دقيقة',quiz:{q:'أي نوع يمثل الأعداد الصحيحة في Python؟',opts:['str','int','float','bool'],ans:1}},
+      {id:'1-3',title:'الشروط والحلقات التكرارية',dur:'35 دقيقة',quiz:{q:'ما الكلمة المفتاحية للشرط؟',opts:['for','if','while','def'],ans:1}},
+      {id:'1-4',title:'الدوال والوحدات',dur:'40 دقيقة',quiz:{q:'كيف تعرّف دالة في Python؟',opts:['function f():','def f():','void f():','fn f():'],ans:1}},
+      {id:'1-5',title:'القوائم والقواميس',dur:'35 دقيقة',quiz:{q:'ما رمز القاموس في Python؟',opts:['[]','()','{}','<>'],ans:2}},
+      {id:'1-6',title:'مشروع ختامي: حاسبة ذكية',dur:'50 دقيقة',quiz:{q:'أي دالة تطبع مخرجات؟',opts:['input()','print()','show()','write()'],ans:1}},
+    ]},
+  { id:2, title:'تصميم واجهات UI/UX الحديثة', cat:'تصميم', icon:'🎨', color:'#FF375F', rating:4.8, students:9800, hours:14, instructor:'م. ريم السعدي', level:'متوسط', desc:'احترف تصميم التجربة وواجهة المستخدم باستخدام Figma وأحدث مبادئ الـ UX.',
+    lessons:[
+      {id:'2-1',title:'مبادئ تصميم UX وتجربة المستخدم',dur:'28 دقيقة',quiz:{q:'ماذا يعني UX؟',opts:['User Xperience','User Extension','Ultra Xperience','UI eXtra'],ans:0}},
+      {id:'2-2',title:'أساسيات Figma للمصممين',dur:'40 دقيقة',quiz:{q:'ما وظيفة Figma؟',opts:['برمجة','تصميم','قواعد بيانات','شبكات'],ans:1}},
+      {id:'2-3',title:'نظرية الألوان والطباعة',dur:'30 دقيقة',quiz:{q:'ما الألوان الأساسية؟',opts:['أخضر/أسود/أبيض','أحمر/أزرق/أصفر','برتقالي/بنفسجي/بني','كل الخيارات'],ans:1}},
+      {id:'2-4',title:'تصميم Wireframes والـ Prototypes',dur:'45 دقيقة',quiz:{q:'ما هو الـ Wireframe؟',opts:['مخطط أولي','نموذج نهائي','قاعدة بيانات','كود برمجي'],ans:0}},
+      {id:'2-5',title:'مشروع: تصميم تطبيق جوال كامل',dur:'60 دقيقة',quiz:{q:'ما أداة التصدير المناسبة للمطورين؟',opts:['Export Assets','Save File','Print','Download All'],ans:0}},
+    ]},
+  { id:3, title:'علم البيانات والتحليل الإحصائي', cat:'بيانات', icon:'📊', color:'#FF9F0A', rating:4.7, students:7600, hours:22, instructor:'د. خالد المنصور', level:'متوسط', desc:'تعلم تحليل البيانات باستخدام Python وPandas وNumPy وMatplotlib.',
+    lessons:[
+      {id:'3-1',title:'مقدمة في علم البيانات',dur:'20 دقيقة',quiz:{q:'ما أداة تحليل البيانات الأشهر؟',opts:['Pandas','Word','Excel فقط','Notepad'],ans:0}},
+      {id:'3-2',title:'Pandas للتعامل مع الجداول',dur:'40 دقيقة',quiz:{q:'ما دالة قراءة CSV في Pandas؟',opts:['read_csv','open_file','load_data','get_csv'],ans:0}},
+      {id:'3-3',title:'تصوير البيانات مع Matplotlib',dur:'35 دقيقة',quiz:{q:'ما نوع الرسم البياني للبيانات الزمنية؟',opts:['Pie Chart','Bar Chart','Line Chart','Scatter'],ans:2}},
+      {id:'3-4',title:'الإحصاء التطبيقي',dur:'45 دقيقة',quiz:{q:'ما المتوسط الحسابي لـ [2,4,6]؟',opts:['3','4','5','6'],ans:1}},
+      {id:'3-5',title:'مشروع: تحليل بيانات حقيقية',dur:'70 دقيقة',quiz:{q:'ما معنى Null في البيانات؟',opts:['صفر','قيمة مفقودة','نص فارغ','خطأ'],ans:1}},
+    ]},
+  { id:4, title:'الأمن السيبراني الأخلاقي', cat:'أمن', icon:'🛡️', color:'#30D158', rating:4.9, students:11200, hours:20, instructor:'م. فيصل الدوسري', level:'متقدم', desc:'تعرف على ثغرات الأنظمة وكيفية الحماية منها — للاستخدام الأخلاقي والقانوني فقط.',
+    lessons:[
+      {id:'4-1',title:'مقدمة في الأمن السيبراني',dur:'22 دقيقة',quiz:{q:'ما معنى CIA في الأمن؟',opts:['Confidentiality, Integrity, Availability','Central Intelligence Agency','Computer Internet Access','None'],ans:0}},
+      {id:'4-2',title:'اختبار الاختراق الأخلاقي',dur:'50 دقيقة',quiz:{q:'ما أداة مسح الشبكات الشهيرة؟',opts:['Nmap','Word','Photoshop','Excel'],ans:0}},
+      {id:'4-3',title:'تشفير البيانات وبروتوكولات الأمان',dur:'40 دقيقة',quiz:{q:'ما خوارزمية التشفير الأكثر أماناً؟',opts:['MD5','SHA-1','AES-256','Base64'],ans:2}},
+      {id:'4-4',title:'الهندسة الاجتماعية وكيفية التصدي لها',dur:'30 دقيقة',quiz:{q:'ما هو Phishing؟',opts:['صيد السمك','سرقة البيانات عبر التصيد','فيروس','برنامج'],ans:1}},
+      {id:'4-5',title:'مشروع: تحليل ثغرة أمنية وهمية',dur:'60 دقيقة',quiz:{q:'ما معنى CVE؟',opts:['Common Vulnerabilities and Exposures','Computer Virus Engine','Critical Version Error','None'],ans:0}},
+    ]},
+  { id:5, title:'تطوير مواقع الويب الحديثة', cat:'برمجة', icon:'🌐', color:'#0A84FF', rating:4.8, students:15600, hours:25, instructor:'م. نورة الشمري', level:'مبتدئ', desc:'من الصفر إلى مطوّر ويب محترف. تعلّم HTML وCSS وJavaScript وReact.',
+    lessons:[
+      {id:'5-1',title:'HTML5 — هيكل الصفحات',dur:'30 دقيقة',quiz:{q:'ما وسم عنوان الصفحة؟',opts:['<title>','<head>','<header>','<h1>'],ans:0}},
+      {id:'5-2',title:'CSS3 — التصميم والتنسيق',dur:'40 دقيقة',quiz:{q:'ما خاصية تغيير لون الخلفية؟',opts:['color','background-color','fill','bg'],ans:1}},
+      {id:'5-3',title:'JavaScript — التفاعل والديناميكية',dur:'50 دقيقة',quiz:{q:'كيف تطبع نصاً في JS؟',opts:['print()','echo()','console.log()','write()'],ans:2}},
+      {id:'5-4',title:'React — بناء واجهات تفاعلية',dur:'60 دقيقة',quiz:{q:'ما هو JSX؟',opts:['JavaScript XML','Java Syntax eXtension','Just Simple X','None'],ans:0}},
+      {id:'5-5',title:'API وربط الواجهة بالخادم',dur:'45 دقيقة',quiz:{q:'ما دالة جلب البيانات في JS؟',opts:['fetch()','get()','load()','request()'],ans:0}},
+      {id:'5-6',title:'نشر الموقع — Deployment',dur:'35 دقيقة',quiz:{q:'ما منصة النشر المجانية الشهيرة؟',opts:['Vercel','PayPal','Amazon','Google Drive'],ans:0}},
+    ]},
+  { id:6, title:'الذكاء الاصطناعي وتعلم الآلة', cat:'بيانات', icon:'🤖', color:'#BF5AF2', rating:4.9, students:18900, hours:30, instructor:'د. سالم القحطاني', level:'متقدم', desc:'ادخل عالم الذكاء الاصطناعي. تعلّم sklearn وTensorFlow وبناء نماذج ذكية.',
+    lessons:[
+      {id:'6-1',title:'مقدمة في الذكاء الاصطناعي',dur:'25 دقيقة',quiz:{q:'ما اختصار AI؟',opts:['Artificial Intelligence','Auto Internet','Advanced Input','None'],ans:0}},
+      {id:'6-2',title:'أنواع تعلم الآلة',dur:'35 دقيقة',quiz:{q:'ما نوع التعلم الذي يستخدم بيانات مصنّفة؟',opts:['Unsupervised','Supervised','Reinforcement','Semi'],ans:1}},
+      {id:'6-3',title:'بناء نموذج تصنيف مع sklearn',dur:'50 دقيقة',quiz:{q:'ما مكتبة التعلم الآلي الشهيرة؟',opts:['scikit-learn','numpy','pandas','matplotlib'],ans:0}},
+      {id:'6-4',title:'الشبكات العصبية مع TensorFlow',dur:'55 دقيقة',quiz:{q:'من طوّر TensorFlow؟',opts:['Google','Facebook','Apple','Microsoft'],ans:0}},
+      {id:'6-5',title:'معالجة اللغة الطبيعية NLP',dur:'45 دقيقة',quiz:{q:'ما معنى NLP؟',opts:['Natural Language Processing','New Learning Protocol','Node Library Package','None'],ans:0}},
+      {id:'6-6',title:'مشروع: نظام توصيات ذكي',dur:'80 دقيقة',quiz:{q:'أي منصة تستخدم التوصيات؟',opts:['Netflix','Twitter','كلاهما','لا أحد'],ans:2}},
+    ]},
+  { id:7, title:'قواعد البيانات SQL وNoSQL', cat:'برمجة', icon:'🗄️', color:'#FF6B35', rating:4.7, students:8200, hours:16, instructor:'م. عبدالله الغامدي', level:'مبتدئ', desc:'أتقن التعامل مع قواعد البيانات من MySQL إلى MongoDB.',
+    lessons:[
+      {id:'7-1',title:'مقدمة في قواعد البيانات',dur:'20 دقيقة',quiz:{q:'ما نوع قاعدة البيانات العلائقية؟',opts:['MongoDB','Redis','MySQL','Firebase'],ans:2}},
+      {id:'7-2',title:'أوامر SQL الأساسية',dur:'35 دقيقة',quiz:{q:'ما أمر جلب البيانات؟',opts:['GET','SELECT','FIND','FETCH'],ans:1}},
+      {id:'7-3',title:'العلاقات والـ Joins',dur:'40 دقيقة',quiz:{q:'ما معنى PRIMARY KEY؟',opts:['مفتاح تشفير','معرّف فريد','اسم الجدول','رقم سري'],ans:1}},
+      {id:'7-4',title:'MongoDB وNoSQL',dur:'40 دقيقة',quiz:{q:'ما تنسيق تخزين MongoDB؟',opts:['JSON/BSON','XML','CSV','SQL'],ans:0}},
+    ]},
+  { id:8, title:'إنتاجية وإدارة المشاريع', cat:'إدارة', icon:'📋', color:'#34AADC', rating:4.6, students:5400, hours:10, instructor:'د. منيرة البقمي', level:'مبتدئ', desc:'ادارة مشاريعك باحتراف باستخدام Agile وScrum وأدوات الإنتاجية الحديثة.',
+    lessons:[
+      {id:'8-1',title:'مقدمة في إدارة المشاريع',dur:'18 دقيقة',quiz:{q:'ما منهجية تطوير البرمجيات المرنة؟',opts:['Waterfall','Agile','Spiral','V-Model'],ans:1}},
+      {id:'8-2',title:'Scrum والسبرينت',dur:'28 دقيقة',quiz:{q:'ما مدة Sprint الافتراضية؟',opts:['أسبوع','شهر','2-4 أسابيع','6 أشهر'],ans:2}},
+      {id:'8-3',title:'أدوات الإنتاجية: Notion وTrello',dur:'25 دقيقة',quiz:{q:'ما وظيفة Trello؟',opts:['تصميم','إدارة المهام','برمجة','تحرير فيديو'],ans:1}},
+      {id:'8-4',title:'مشروع: خطة مشروع حقيقي',dur:'40 دقيقة',quiz:{q:'ما أول خطوة في تخطيط المشروع؟',opts:['البرمجة','تحديد الهدف','التصميم','الاختبار'],ans:1}},
+    ]},
+];
+
+const categories = ['الكل','برمجة','تصميم','بيانات','أمن','إدارة'];
+const leaderboard = [
+  {name:'سارة العلي',xp:8400,avatar:'س',color:'#FF375F'},
+  {name:'محمد الزهراني',xp:7200,avatar:'م',color:'#0A84FF'},
+  {name:'نورة السعيد',xp:6100,avatar:'ن',color:'#BF5AF2'},
+  {name:'فهد العتيبي',xp:5800,avatar:'ف',color:'#FF9F0A'},
+  {name:'أحمد محمد',xp:1200,avatar:'أ',color:'#32D74B',isMe:true},
+  {name:'ريم الحربي',xp:980,avatar:'ر',color:'#34AADC'},
+];
+const achievements = [
+  {icon:'🚀',name:'بداية قوية',desc:'أكمل أول درس',unlock:s=>s.completedLessons.length>=1},
+  {icon:'🔥',name:'مثابر',desc:'7 أيام متواصلة',unlock:s=>s.streak>=7},
+  {icon:'📚',name:'قارئ نهم',desc:'سجّل في 3 دورات',unlock:s=>s.enrolledCourses.length>=3},
+  {icon:'⭐',name:'متميز',desc:'أكمل دورة كاملة',unlock:s=>s.certificates.length>=1},
+  {icon:'🏆',name:'بطل',desc:'1000+ نقطة',unlock:s=>s.xp>=1000},
+  {icon:'💎',name:'خبير',desc:'أكمل 10 دروس',unlock:s=>s.completedLessons.length>=10},
+];
+const notifications = [
+  {icon:'🎉',text:'تهانينا! أكملت درس Python الأول',time:'منذ 5 دقائق'},
+  {icon:'🔥',text:'سلسلتك 7 أيام! لا تنقطع',time:'منذ ساعة'},
+  {icon:'📢',text:'دورة جديدة: الذكاء الاصطناعي بالعربي',time:'أمس'},
+  {icon:'🏆',text:'وصلت لـ 1200 نقطة!',time:'أمس'},
+];
+
+// =============================================
+//  AUTH
+// =============================================
+function switchAuth(tab) {
+  document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.auth-form').forEach(f=>f.classList.add('hide'));
+  if(tab==='login'){document.querySelector('.auth-tab:first-child').classList.add('active');document.getElementById('loginForm').classList.remove('hide');}
+  else{document.querySelector('.auth-tab:last-child').classList.add('active');document.getElementById('registerForm').classList.remove('hide');}
+}
+function doLogin(){
+  const email=document.getElementById('loginEmail').value.trim();
+  const pass=document.getElementById('loginPass').value;
+  if(!email||!pass){toast('يرجى تعبئة جميع الحقول');return;}
+  if(!email.includes('@')){toast('البريد الإلكتروني غير صحيح');return;}
+  const name=email.split('@')[0].replace(/[^a-zA-Z\u0600-\u06FF]/g,' ').trim()||'المستخدم';
+  launchApp(name);
+}
+function doRegister(){
+  const name=document.getElementById('regName').value.trim();
+  const email=document.getElementById('regEmail').value.trim();
+  const field=document.getElementById('regField').value;
+  const pass=document.getElementById('regPass').value;
+  if(!name||!email||!field||!pass){toast('يرجى تعبئة جميع الحقول');return;}
+  if(pass.length<8){toast('كلمة المرور يجب أن تكون 8 أحرف على الأقل');return;}
+  launchApp(name);
+}
+function demoLogin(){launchApp('أحمد محمد');}
+function launchApp(name){
+  state.user=name;
+  const authEl=document.getElementById('authScreen');
+  authEl.style.transition='.5s opacity ease, .5s transform ease';
+  authEl.style.opacity='0';authEl.style.transform='translateY(-20px)';
+  setTimeout(()=>{authEl.classList.remove('show');document.getElementById('appScreen').classList.add('show');initApp(name);},500);
+}
+function doLogout(){
+  document.getElementById('appScreen').classList.remove('show');
+  const authEl=document.getElementById('authScreen');
+  authEl.style.opacity='0';authEl.style.transform='translateY(-20px)';
+  authEl.classList.add('show');
+  requestAnimationFrame(()=>{authEl.style.opacity='1';authEl.style.transform='translateY(0)';});
+  state={...state,enrolledCourses:[],completedLessons:[],certificates:[],xp:1200};
+}
+
+// =============================================
+//  INIT
+// =============================================
+function initApp(name){
+  document.getElementById('heroName').textContent=name.split(' ')[0];
+  document.getElementById('profName').textContent=name;
+  document.getElementById('profAva').textContent=name[0]||'م';
+  document.getElementById('xpCount').textContent=state.xp.toLocaleString();
+  document.getElementById('streakNum').textContent=state.streak;
+  document.getElementById('tipText').textContent=tips[Math.floor(Math.random()*tips.length)];
+  renderHomeCourses();renderExplore();renderLeaderboard();renderSettings();
+  renderStars();renderFeedbacks();renderAchievements();renderBadges();updateStats();animateProgressBar();
+}
+function animateProgressBar(){
+  const pct=Math.min(100,Math.round((state.completedLessons.length/5)*100));
+  document.getElementById('weekPct').textContent=pct+'%';
+  setTimeout(()=>{document.getElementById('weekBar').style.width=pct+'%';},300);
+}
+function updateStats(){
+  document.getElementById('s1').textContent=state.completedLessons.length;
+  document.getElementById('s2').textContent=state.enrolledCourses.length;
+  document.getElementById('s3').textContent=state.certificates.length;
+  document.getElementById('doneLessons').textContent=state.completedLessons.length;
+  document.getElementById('xpCount').textContent=state.xp.toLocaleString();
+  renderAchievements();renderBadges();animateProgressBar();
+}
+
+// =============================================
+//  HOME COURSES
+// =============================================
+function renderHomeCourses(){
+  const top=[...courses].sort((a,b)=>b.students-a.students).slice(0,4);
+  document.getElementById('homeCourseList').innerHTML=top.map(c=>courseCardHTML(c)).join('');
+}
+function courseCardHTML(c){
+  const enrolled=state.enrolledCourses.includes(c.id);
+  const done=doneCount(c);const pct=Math.round((done/c.lessons.length)*100);
+  return`<div class="course-card" onclick="openCourse(${c.id})">
+    <div class="course-thumb" style="background:${c.color}22;color:${c.color}">${c.icon}</div>
+    <div class="course-info"><h4>${c.title}</h4><p><i class="fa-solid fa-user" style="color:${c.color}"></i> ${c.instructor} · ⭐ ${c.rating}</p>
+    ${enrolled?`<div class="mini-bar"><div class="mini-fill" style="width:${pct}%;background:${c.color}"></div></div>`:''}</div>
+    <div class="course-badge" style="color:${c.color};background:${c.color}22">${enrolled?pct+'%':c.level}</div>
+  </div>`;
+}
+function doneCount(c){return c.lessons.filter(l=>state.completedLessons.includes(l.id)).length;}
+
+// =============================================
+//  EXPLORE
+// =============================================
+let activeCat='الكل';
+function renderExplore(filter=''){
+  document.getElementById('catsList').innerHTML=categories.map(c=>`<button class="cat-btn ${c===activeCat?'active':''}" onclick="setCat('${c}')">${c}</button>`).join('');
+  filterCourses(filter);
+}
+function setCat(c){activeCat=c;renderExplore(document.querySelector('#secExplore input').value);}
+function filterCourses(q=''){
+  const list=courses.filter(c=>{
+    const matchCat=activeCat==='الكل'||c.cat===activeCat;
+    const matchQ=!q||c.title.includes(q)||c.instructor.includes(q)||c.cat.includes(q);
+    return matchCat&&matchQ;
+  });
+  document.getElementById('catsList').innerHTML=categories.map(c=>`<button class="cat-btn ${c===activeCat?'active':''}" onclick="setCat('${c}')">${c}</button>`).join('');
+  document.getElementById('exploreList').innerHTML=list.length?list.map(c=>courseCardHTML(c)).join(''):'<div class="empty"><i class="fa-solid fa-magnifying-glass"></i><p>لا توجد نتائج</p></div>';
+}
+
+// =============================================
+//  LIBRARY
+// =============================================
+function renderLibrary(){
+  const enrolled=courses.filter(c=>state.enrolledCourses.includes(c.id));
+  if(!enrolled.length){document.getElementById('libraryList').innerHTML='<div class="empty"><i class="fa-solid fa-book-open"></i><p>لم تسجل في أي دورة بعد<br><small>استكشف الدورات وابدأ رحلتك</small></p></div>';return;}
+  document.getElementById('libraryList').innerHTML=enrolled.map(c=>{
+    const done=doneCount(c);const pct=Math.round((done/c.lessons.length)*100);
+    return`<div class="lib-card" onclick="openCourse(${c.id})">
+      <div class="lib-card-top"><div class="course-thumb" style="background:${c.color}22;color:${c.color};width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">${c.icon}</div>
+      <div><h4>${c.title}</h4><p>${c.instructor} · ${done}/${c.lessons.length} درس</p></div></div>
+      <div class="lib-progress"><div class="lib-bar"><div class="lib-fill" style="width:${pct}%;background:${c.color}"></div></div><div class="lib-pct">${pct}%</div></div>
+    </div>`;
+  }).join('');
+}
+
+// =============================================
+//  COURSE DETAIL
+// =============================================
+function openCourse(id){
+  const c=courses.find(x=>x.id===id);state.selectedCourse=c;
+  const enrolled=state.enrolledCourses.includes(id);
+  document.getElementById('detailHeader').innerHTML=`
+    <div class="detail-icon" style="background:${c.color}22;color:${c.color}">${c.icon}</div>
+    <h2>${c.title}</h2>
+    <div class="detail-meta">
+      <span class="meta-tag"><i class="fa-solid fa-star"></i>${c.rating}</span>
+      <span class="meta-tag"><i class="fa-solid fa-users"></i>${c.students.toLocaleString()} طالب</span>
+      <span class="meta-tag"><i class="fa-solid fa-clock"></i>${c.hours} ساعة</span>
+      <span class="meta-tag"><i class="fa-solid fa-signal"></i>${c.level}</span>
+    </div>
+    <p style="font-size:14px;color:var(--txt2);line-height:1.8;margin-bottom:16px">${c.desc}</p>`;
+  const enrollBtn=document.getElementById('enrollBtn');
+  if(enrolled){enrollBtn.textContent='✅ أنت مسجّل في هذه الدورة';enrollBtn.classList.add('enrolled');}
+  else{enrollBtn.textContent='تسجيل في الدورة مجاناً 🎓';enrollBtn.classList.remove('enrolled');}
+  document.getElementById('lessonsList').innerHTML=`
+    <h3 style="margin-bottom:16px;font-size:18px">📖 محتوى الدورة (${c.lessons.length} دروس)</h3>
+    ${c.lessons.map((l,i)=>{
+      const done=state.completedLessons.includes(l.id);const canPlay=enrolled||i===0;
+      return`<div class="lesson-item ${done?'done':''}" onclick="${canPlay?`openLesson('${l.id}')`:`toast('سجّل في الدورة أولاً')`}">
+        <div class="lesson-num">${done?'<i class="fa-solid fa-check"></i>':(i+1)}</div>
+        <div class="lesson-info"><h5>${l.title}</h5><p><i class="fa-solid fa-clock"></i> ${l.dur} ${i===0&&!enrolled?'· 🔓 مجاني':''}</p></div>
+        <i class="fa-solid ${done?'fa-circle-check':'fa-play'} lesson-check"></i>
+      </div>`;
+    }).join('')}`;
+  document.getElementById('courseDetail').classList.add('show');window.scrollTo(0,0);
+}
+function closeCourse(){document.getElementById('courseDetail').classList.remove('show');}
+function toggleEnroll(){
+  const c=state.selectedCourse;if(!c)return;
+  if(state.enrolledCourses.includes(c.id)){toast('أنت مسجّل بالفعل');return;}
+  state.enrolledCourses.push(c.id);state.xp+=50;
+  toast('🎉 تم التسجيل! حصلت على 50 نقطة');
+  updateStats();renderLibrary();renderHomeCourses();openCourse(c.id);
+}
+
+// =============================================
+//  LESSON PLAYER
+// =============================================
+function openLesson(lessonId){
+  const course=state.selectedCourse;const lesson=course.lessons.find(l=>l.id===lessonId);
+  state.selectedLesson=lesson;state.playing=false;state.playProgress=0;
+  document.getElementById('videoTitle').textContent=lesson.title;
+  document.getElementById('playerFill').style.width='0%';
+  document.getElementById('timeLbl').textContent='0:00';
+  document.getElementById('playIcon').className='fa-solid fa-play';
+  document.getElementById('playBtn').innerHTML='<i class="fa-solid fa-play"></i>';
+  const done=state.completedLessons.includes(lessonId);
+  document.getElementById('playerBody').innerHTML=`
+    <h3>${lesson.title}</h3>
+    <p style="color:var(--txt3);font-size:13px;margin-bottom:16px;line-height:1.8">في هذا الدرس ستتعلم المفاهيم الأساسية المتعلقة بالموضوع وستطبّق ما تعلمته عبر مثال تطبيقي.</p>
+    <div class="quiz-card">
+      <h4>❓ سؤال الدرس</h4>
+      <p style="font-size:14px;margin-bottom:14px;font-weight:700">${lesson.quiz.q}</p>
+      ${lesson.quiz.opts.map((o,i)=>`<div class="quiz-opt" id="opt${i}" onclick="answerQuiz(${i},${lesson.quiz.ans},'${lessonId}')">${o}</div>`).join('')}
+    </div>
+    ${done?'<div style="text-align:center;padding:20px;color:var(--primary);font-weight:800">✅ أكملت هذا الدرس مسبقاً</div>':`<button class="complete-btn" onclick="completeLesson('${lessonId}')">تحديد كمكتمل ✅</button>`}`;
+  document.getElementById('lessonPlayer').classList.add('show');
+}
+function closeLesson(){clearInterval(state.playTimer);state.playing=false;document.getElementById('lessonPlayer').classList.remove('show');}
+function togglePlay(){
+  state.playing=!state.playing;
+  const icon=document.getElementById('playIcon');
+  document.getElementById('playBtn').innerHTML=`<i class="fa-solid ${state.playing?'fa-pause':'fa-play'}"></i>`;
+  icon.className=`fa-solid ${state.playing?'fa-pause':'fa-play'}`;
+  if(state.playing){
+    state.playTimer=setInterval(()=>{
+      state.playProgress=Math.min(100,state.playProgress+0.5);
+      document.getElementById('playerFill').style.width=state.playProgress+'%';
+      const total=600,sec=Math.round(total*state.playProgress/100);
+      document.getElementById('timeLbl').textContent=`${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;
+      if(state.playProgress>=100){clearInterval(state.playTimer);state.playing=false;}
+    },100);
+  }else{clearInterval(state.playTimer);}
+}
+function seekBack(){state.playProgress=Math.max(0,state.playProgress-5);document.getElementById('playerFill').style.width=state.playProgress+'%';}
+function seekFwd(){state.playProgress=Math.min(100,state.playProgress+5);document.getElementById('playerFill').style.width=state.playProgress+'%';}
+function seekClick(e){const bar=e.currentTarget;const pct=(e.offsetX/bar.offsetWidth)*100;state.playProgress=pct;document.getElementById('playerFill').style.width=pct+'%';}
+function answerQuiz(selected,correct,lessonId){
+  document.querySelectorAll('.quiz-opt').forEach((el,i)=>{
+    el.style.pointerEvents='none';
+    if(i===correct)el.classList.add('correct');
+    else if(i===selected)el.classList.add('wrong');
+  });
+  if(selected===correct)toast('✅ إجابة صحيحة! +10 نقاط');
+  else toast('❌ إجابة خاطئة، الصواب: '+state.selectedLesson.quiz.opts[correct]);
+}
+function completeLesson(lessonId){
+  if(state.completedLessons.includes(lessonId)){toast('أكملت هذا الدرس مسبقاً');return;}
+  state.completedLessons.push(lessonId);state.xp+=100;
+  toast('🎉 درس مكتمل! +100 نقطة');
+  updateStats();
+  const c=state.selectedCourse;
+  if(c&&doneCount(c)===c.lessons.length){
+    setTimeout(()=>{
+      if(!state.certificates.find(x=>x.courseId===c.id)){
+        state.certificates.push({courseId:c.id,courseTitle:c.title,date:new Date().toLocaleDateString('ar-SA')});
+        state.xp+=500;updateStats();
+        toast('🏆 أنهيت الدورة! حصلت على شهادة + 500 نقطة!');
+      }
+    },1200);
+  }
+  renderLibrary();openCourse(c.id);closeLesson();
+}
+
+// =============================================
+//  CERTIFICATES
+// =============================================
+function openCerts(){
+  const certs=state.certificates;
+  if(!certs.length){renderCertView([{courseId:99,courseTitle:'أساسيات لغة Python من الصفر',date:'١٤٤٦/٠٧/١٢',demo:true}]);}
+  else{renderCertView(certs);}
+}
+function renderCertView(certs){
+  document.getElementById('certContent').innerHTML=certs.map(cert=>`
+    <div class="certificate">
+      <div class="cert-logo">korseta</div>
+      <div class="cert-subtitle">منصة التعلم العربي الذكي</div>
+      <div class="cert-line"></div>
+      <div class="cert-presents">تُقدّم هذه الشهادة لـ</div>
+      <div class="cert-name">${state.user||'أحمد محمد'}</div>
+      <div class="cert-body">لإتمامه/ها بنجاح دورة</div>
+      <div class="cert-course">${cert.courseTitle}</div>
+      <div class="cert-body">وذلك بعد الاجتياز الكامل لجميع الوحدات والاختبارات المقررة.</div>
+      <div class="cert-footer">
+        <div class="sig"><strong>د. ناصر شبكة</strong>مشرف البرنامج</div>
+        <div class="cert-seal"><i class="fa-solid fa-award"></i></div>
+        <div class="sig"><strong>${cert.date}</strong>تاريخ الإصدار</div>
+      </div>
+    </div>
+    <div style="background:var(--bg3);padding:12px;border-radius:var(--r2);margin-bottom:28px">
+      <p style="font-size:12px;color:var(--txt3);text-align:center;margin-bottom:12px">🔗 رمز التحقق: KORSET-2025-${String(cert.courseId).padStart(4,'0')}</p>
+      <div class="cert-share-btns">
+        <button class="cert-share-btn" onclick="toast('تم نسخ رابط الشهادة!')"><i class="fa-solid fa-link"></i>نسخ</button>
+        <button class="cert-share-btn" onclick="toast('جاري الحفظ كـ PDF...')"><i class="fa-solid fa-download"></i>PDF</button>
+        <button class="cert-share-btn" onclick="toast('تمت المشاركة على LinkedIn!')"><i class="fa-brands fa-linkedin"></i>LinkedIn</button>
+      </div>
+    </div>`).join('');
+  document.getElementById('certView').classList.add('show');
+}
+
+// =============================================
+//  LEADERBOARD
+// =============================================
+function renderLeaderboard(){
+  const sorted=[...leaderboard].map(u=>u.isMe?{...u,xp:state.xp,name:state.user||u.name}:u).sort((a,b)=>b.xp-a.xp);
+  const rankClass=['gold','silver','bronze'];
+  document.getElementById('lbList').innerHTML=sorted.map((u,i)=>`
+    <div class="lb-item ${u.isMe?'me':''}">
+      <div class="lb-rank ${rankClass[i]||''}">${i<3?['🥇','🥈','🥉'][i]:(i+1)}</div>
+      <div class="lb-ava" style="background:${u.color}22;color:${u.color}">${u.avatar}</div>
+      <div class="lb-info"><h5>${u.name}${u.isMe?' (أنت)':''}</h5><p>${u.isMe?'أنت هنا!':'متعلم متميز'}</p></div>
+      <div class="lb-xp">${u.xp.toLocaleString()} ⚡</div>
+    </div>`).join('');
+}
+
+// =============================================
+//  ACHIEVEMENTS
+// =============================================
+function renderAchievements(){
+  document.getElementById('achGrid').innerHTML=achievements.map(a=>{
+    const unlocked=a.unlock(state);
+    return`<div class="ach-item ${unlocked?'unlocked':'locked'}"><div class="ach-icon">${a.icon}</div><div class="ach-name">${a.name}</div></div>`;
+  }).join('');
+}
+function renderBadges(){
+  const badges=[];
+  if(state.xp>=1000)badges.push({icon:'⚡',label:'1000+ نقطة'});
+  if(state.streak>=7)badges.push({icon:'🔥',label:`${state.streak} أيام`});
+  if(state.certificates.length)badges.push({icon:'🏆',label:'حاصل على شهادة'});
+  if(!badges.length)badges.push({icon:'🌱',label:'مبتدئ'});
+  document.getElementById('badgesRow').innerHTML=badges.map(b=>`<div class="badge-item">${b.icon} ${b.label}</div>`).join('');
+}
+
+// =============================================
+//  SETTINGS
+// =============================================
+function renderSettings(){
+  const items=[
+    {key:'notifications',icon:'fa-bell',label:'الإشعارات',color:'var(--accent)'},
+    {key:'darkMode',icon:'fa-moon',label:'الوضع الداكن',color:'var(--purple)'},
+    {key:'autoplay',icon:'fa-circle-play',label:'تشغيل تلقائي',color:'var(--primary)'},
+    {key:'arabic',icon:'fa-language',label:'اللغة العربية',color:'var(--gold)'},
+  ];
+  document.getElementById('settingsList').innerHTML=items.map(item=>`
+    <div class="settings-item">
+      <div class="l"><i class="fa-solid ${item.icon}" style="width:36px;height:36px;background:${item.color}22;border-radius:12px;display:flex;align-items:center;justify-content:center;color:${item.color}"></i><span>${item.label}</span></div>
+      <div class="toggle ${state.settings[item.key]?'on':''}" onclick="toggleSetting('${item.key}',this)"></div>
+    </div>`).join('')+`
+  <div style="background:var(--bg3);border-radius:var(--r2);padding:18px;margin-top:10px;text-align:center">
+    <p style="font-size:12px;color:var(--txt3);line-height:1.9">📱 تطبيق korseta v2.0 — PWA<br>بإشراف <strong style="color:var(--primary)">د. ناصر شبكة</strong><br>قسم تقنية المعلومات — جامعة التقنية</p>
+  </div>`;
+}
+function toggleSetting(key,el){state.settings[key]=!state.settings[key];el.classList.toggle('on');toast(state.settings[key]?'✅ تم التفعيل':'❌ تم الإيقاف');}
+
+// =============================================
+//  FEEDBACK
+// =============================================
+function renderStars(){
+  document.getElementById('starRating').innerHTML=[1,2,3,4,5].map(i=>
+    `<i class="fa-${state.selectedStars>=i?'solid':'regular'} fa-star" style="font-size:28px;color:${state.selectedStars>=i?'var(--gold)':'var(--bg5)'};cursor:pointer;transition:var(--tr)" onclick="setStars(${i})"></i>`
+  ).join('');
+}
+function setStars(n){state.selectedStars=n;renderStars();}
+function submitFeedback(){
+  if(!state.selectedStars){toast('يرجى اختيار التقييم');return;}
+  const text=document.getElementById('feedbackText').value.trim();
+  if(!text){toast('يرجى كتابة اقتراحك');return;}
+  state.feedbacks.unshift({name:state.user||'مستخدم',stars:state.selectedStars,text});
+  state.selectedStars=0;document.getElementById('feedbackText').value='';
+  renderStars();renderFeedbacks();toast('✅ شكراً على اقتراحك!');
+}
+function renderFeedbacks(){
+  document.getElementById('feedbackList').innerHTML=state.feedbacks.map(f=>`
+    <div style="background:var(--bg3);border-radius:var(--r2);padding:16px;margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+        <strong style="font-size:13px">${f.name}</strong>
+        <span style="color:var(--gold)">${'★'.repeat(f.stars)}${'☆'.repeat(5-f.stars)}</span>
+      </div>
+      <p style="font-size:13px;color:var(--txt2);line-height:1.7">${f.text}</p>
+    </div>`).join('');
+}
+
+// =============================================
+//  NOTIFICATIONS
+// =============================================
+function showNotif(){
+  document.getElementById('notifList').innerHTML=notifications.map(n=>`
+    <div style="display:flex;gap:12px;padding:14px;background:var(--bg4);border-radius:var(--r);margin-bottom:8px">
+      <span style="font-size:22px">${n.icon}</span>
+      <div><p style="font-size:13px;font-weight:700">${n.text}</p><p style="font-size:11px;color:var(--txt3);margin-top:4px">${n.time}</p></div>
+    </div>`).join('');
+  document.getElementById('notifModal').classList.add('show');
+}
+
+// =============================================
+//  NAV & SECTIONS
+// =============================================
+function showSec(id){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('show'));
+  document.getElementById(id).classList.add('show');
+  if(id==='secLibrary')renderLibrary();
+  if(id==='secLeaderboard')renderLeaderboard();
+  if(id==='secProfile'){renderAchievements();renderBadges();}
+  window.scrollTo(0,0);
+}
+function setNav(idx){
+  document.querySelectorAll('.nav-btn').forEach((b,i)=>b.classList.toggle('active',i===idx));
+}
+
+// =============================================
+//  TOAST
+// =============================================
+function toast(msg){
+  const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');
+  clearTimeout(el._timer);el._timer=setTimeout(()=>el.classList.remove('show'),2800);
+}
+</script>
+</body>
+</html>
